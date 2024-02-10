@@ -40,13 +40,14 @@ export const ChatFeed = ({ messages = [], isLoading }: ChatFeedProps) => {
 
   return (
     <div
-      className="flex-1 w-full p-4"
+      className="flex flex-col flex-1 w-full p-4 pt-20"
       ref={chatRef}
     >
       <div className="flex-1" />
       <div className="flex flex-col gap-4 w-full">
         {messages.length > 0 &&
           messages.map((message) => {
+            const isAI = message.role === "assistant";
             const isIncomingResponse =
               isLoading &&
               message.role === "assistant" &&
@@ -56,21 +57,26 @@ export const ChatFeed = ({ messages = [], isLoading }: ChatFeedProps) => {
               <div
                 key={message.id}
                 className={`
-                  relative w-4/5 rounded-xl space-y-1 p-3 border border-[#373737] transition-all
-                  ${message.role === "user" ? "ml-auto" : "mr-auto"}
-                  ${message.role === "user" ? "bg-transparent" : "bg-[#292927]"}
+                  relative max-w-[90%] md:max-w-[80%] rounded-xl space-y-0.5 p-3 border border-[#373737] transition-all
+                  ${isAI ? "mr-auto" : "ml-auto"}
+                  ${isAI ? "bg-[#292927]" : "bg-transparent"}
                 `}
               >
-                <p className="font-medium text-sm text-[#8F8F8F] capitalize transition-all">
-                  {message.role === "user" ? "user" : "AI"}
+                <p
+                  className={`
+                    font-medium text-sm text-[#8F8F8F] capitalize transition-all
+                    ${!isAI && "text-end"}
+                  `}
+                >
+                  {isAI ? "AI" : "User"}
                 </p>
-                <p className="text-zinc-200 text-justify tracking-wide transition-all">
+                <p className="text-sm md:text-base text-zinc-200 text-justify tracking-wide transition-all">
                   {message.content}
                   {isIncomingResponse && (
-                    <GoDotFill className="h-2 w-2 bg-white rounded-full animate-ping mt-1" />
+                    <GoDotFill className="h-2 w-2 bg-white rounded-full animate-ping mt-1.5" />
                   )}
                 </p>
-                {message.role === "assistant" && (
+                {isAI && (
                   <button
                     type="button"
                     aria-label="Copy message"
