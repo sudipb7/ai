@@ -3,10 +3,11 @@
 import * as React from "react";
 import { Message } from "ai";
 
-import { BsCheck2Circle, BsClipboard2 } from "react-icons/bs";
 import { GoDotFill } from "react-icons/go";
+import { Check, Copy } from "lucide-react";
 
 import { useChatScroll } from "@/hooks/use-chat-scroll";
+import { cn } from "@/lib/utils";
 
 interface ChatFeedProps {
   messages: Message[];
@@ -40,7 +41,7 @@ export const ChatFeed = ({ messages = [], isLoading }: ChatFeedProps) => {
 
   return (
     <div
-      className="flex flex-col flex-1 w-full p-4 pt-20"
+      className="flex flex-col flex-1 w-full px-4 pt-20 pb-28 bg-offwhite dark:bg-card"
       ref={chatRef}
     >
       <div className="flex-1" />
@@ -56,24 +57,23 @@ export const ChatFeed = ({ messages = [], isLoading }: ChatFeedProps) => {
             return (
               <div
                 key={message.id}
-                className={`
-                  relative max-w-[90%] md:max-w-[80%] rounded-xl space-y-0.5 p-3 border border-[#373737] transition-all
-                  ${isAI ? "mr-auto" : "ml-auto"}
-                  ${isAI ? "bg-[#292927]" : "bg-transparent"}
-                `}
+                className={cn(
+                  "relative max-w-[90%] md:max-w-[80%] rounded-lg p-3 transition-all",
+                  isAI ? "mr-auto" : "ml-auto",
+                  isAI
+                    ? "bg-gradient-to-br from-muted via-secondary to-background dark:to-card border border-secondary"
+                    : "bg-gradient-to-br from-primary via-green-600 to-green-800"
+                )}
               >
                 <p
-                  className={`
-                    font-medium text-sm text-[#8F8F8F] capitalize transition-all
-                    ${!isAI && "text-end"}
-                  `}
+                  className={cn(
+                    "text-sm md:text-base text-justify tracking-wide transition-all",
+                    isAI ? "dark:text-zinc-200" : "text-white"
+                  )}
                 >
-                  {isAI ? "AI" : "User"}
-                </p>
-                <p className="text-sm md:text-base text-zinc-200 text-justify tracking-wide transition-all">
                   {message.content}
                   {isIncomingResponse && (
-                    <GoDotFill className="h-2 w-2 bg-white rounded-full animate-ping mt-1.5" />
+                    <GoDotFill className="h-1 w-1 bg-white rounded-full animate-ping mt-1" />
                   )}
                 </p>
                 {isAI && (
@@ -84,9 +84,9 @@ export const ChatFeed = ({ messages = [], isLoading }: ChatFeedProps) => {
                     className="absolute bottom-0 -right-8 bg-transparent outline-none border-none w-fit p-2"
                   >
                     {isCopied ? (
-                      <BsCheck2Circle className="h-4 w-4 text-cyan-500" />
+                      <Check className="h-4 w-4 text-cyan-500" />
                     ) : (
-                      <BsClipboard2 className="h-4 w-4 text-[#8F8F8F]" />
+                      <Copy className="h-4 w-4 text-[#8F8F8F]" />
                     )}
                   </button>
                 )}

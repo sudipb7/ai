@@ -10,7 +10,7 @@ export const Chat = () => {
     useChat();
 
   return (
-    <section className="min-h-screen flex flex-col mx-auto w-full max-w-4xl border-x border-x-[#373737] relative">
+    <section className="h-full flex flex-col mx-auto w-full max-w-4xl border-x border-x-secondary relative">
       <ChatFeed
         messages={messages}
         isLoading={isLoading}
