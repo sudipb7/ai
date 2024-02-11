@@ -8,6 +8,7 @@ import { Check, Copy } from "lucide-react";
 
 import { useChatScroll } from "@/hooks/use-chat-scroll";
 import { cn } from "@/lib/utils";
+import { Markdown } from "@/components/markdown";
 
 interface ChatFeedProps {
   messages: Message[];
@@ -65,17 +66,16 @@ export const ChatFeed = ({ messages = [], isLoading }: ChatFeedProps) => {
                     : "bg-gradient-to-br from-primary via-green-600 to-green-800"
                 )}
               >
-                <p
-                  className={cn(
-                    "text-sm md:text-base text-justify tracking-wide transition-all",
-                    isAI ? "dark:text-zinc-200" : "text-white"
-                  )}
-                >
-                  {message.content}
-                  {isIncomingResponse && (
-                    <GoDotFill className="h-1 w-1 bg-white rounded-full animate-ping mt-1" />
-                  )}
-                </p>
+                {isAI && !isLoading ? (
+                  <Markdown source={message.content || ""} />
+                ) : (
+                  <p className="text-sm md:text-base text-justify text-white tracking-wide transition-all">
+                    {message.content}
+                    {isIncomingResponse && (
+                      <GoDotFill className="h-1 w-1 bg-white rounded-full animate-ping mt-1" />
+                    )}
+                  </p>
+                )}
                 {isAI && (
                   <button
                     type="button"
