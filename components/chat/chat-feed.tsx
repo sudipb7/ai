@@ -42,7 +42,7 @@ export const ChatFeed = ({ messages = [], isLoading }: ChatFeedProps) => {
 
   return (
     <div
-      className="bg-offwhite dark:bg-card flex flex-col flex-1 w-full px-4 pt-20 pb-28"
+      className="bg-offwhite dark:bg-card flex flex-col w-full min-h-screen px-4 pt-20 pb-28"
       ref={chatRef}
     >
       <div className="flex-1" />
@@ -59,7 +59,7 @@ export const ChatFeed = ({ messages = [], isLoading }: ChatFeedProps) => {
               <div
                 key={message.id}
                 className={cn(
-                  "relative max-w-[90%] md:max-w-[80%] rounded-lg p-3 transition-all",
+                  "relative max-w-[90%] md:max-w-[80%] rounded-lg p-4 transition-all",
                   isAI ? "mr-auto" : "ml-auto",
                   isAI
                     ? "bg-gradient-to-br from-muted via-secondary to-background dark:to-card border border-secondary"
@@ -67,7 +67,10 @@ export const ChatFeed = ({ messages = [], isLoading }: ChatFeedProps) => {
                 )}
               >
                 {isAI && !isLoading ? (
-                  <Markdown source={message.content || ""} />
+                  <Markdown
+                    className="text-foreground/70"
+                    source={message.content || ""}
+                  />
                 ) : (
                   <p className="text-sm md:text-base text-justify text-white tracking-wide transition-all">
                     {message.content}

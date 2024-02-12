@@ -28,7 +28,7 @@ export const MarkdownElement = ({
       element.children[0].type === "text"
     ) {
       return (
-        <p className="relative mt-6 border-l-2 pl-6 italic">
+        <p className="relative mt-4 border-l-2 pl-6 italic">
           {element.children[0].value}
         </p>
       );
@@ -37,7 +37,7 @@ export const MarkdownElement = ({
     if (parent.type === "paragraph") {
       if (element.type === "strong" && element.children[0].type === "text") {
         return (
-          <strong className="font-bold text-white">
+          <strong className="font-bold text-foreground/70">
             {element.children[0].value}
           </strong>
         );
@@ -48,11 +48,11 @@ export const MarkdownElement = ({
           <Link
             href={element.url}
             target="_blank"
-            className="text-white no-underline hover:underline inline-block"
+            className="no-underline hover:underline inline-block"
           >
             <span>{element.children[0].value}</span>
             <ExternalLink
-              className="text-white inline-block ml-1"
+              className="inline-block ml-1"
               size={16}
             />
           </Link>
@@ -67,11 +67,11 @@ export const MarkdownElement = ({
           <Link
             href={element.url}
             target="_blank"
-            className="text-white no-underline hover:underline inline-block"
+            className="no-underline hover:underline inline-block"
           >
             <span>{element.children[0].value}</span>
             <ExternalLink
-              className="text-white inline-block ml-1"
+              className="inline-block ml-1"
               size={16}
             />
           </Link>
@@ -83,7 +83,7 @@ export const MarkdownElement = ({
           <Image
             src={element.url}
             alt={element.alt ?? ""}
-            className="lg:max-w-3xl mx-auto my-10 rounded"
+            className="lg:max-w-3xl mx-auto my-4 rounded"
             width={element.width ?? 900}
             height={element.height ?? 600}
           />
@@ -96,7 +96,7 @@ export const MarkdownElement = ({
 
       if (element.type === "inlineCode") {
         return (
-          <code className="bg-gray-800 text-white py-1 rounded">
+          <code className="bg-muted dark:bg-slate-700 p-0.5 rounded">
             {element.value}
           </code>
         );
@@ -119,7 +119,7 @@ export const MarkdownElement = ({
               return (
                 <li
                   key={i}
-                  className="text-muted-foreground mt-0.5 ml-5"
+                  className="text-muted-foreground my-0.5 ml-5"
                 >
                   <MarkdownElement element={child} />
                 </li>
@@ -181,7 +181,7 @@ export const MarkdownElement = ({
 
   if (element.type === "paragraph") {
     return (
-      <p className="text-muted-foreground">
+      <p className="text-sm md:text-base text-muted-foreground">
         {/* @ts-ignore */}
         {element.children.map((child, i) => (
           <MarkdownElement
@@ -195,7 +195,7 @@ export const MarkdownElement = ({
   }
 
   if (element.type === "list") {
-    const listStyle = cn("ml-6 text-muted-foreground", {
+    const listStyle = cn("ml-1 text-muted-foreground", {
       "list-descimal": element.ordered,
       "list-disc": !element.ordered,
     });

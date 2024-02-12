@@ -19,7 +19,7 @@ export const MarkdownCode = ({ value, lang }: MarkdownCodeProps) => {
 
   return (
     <pre>
-      <code className={cn(styles, "whitespace-pre-wrap")}>{value}</code>
+      <code className={cn(styles, "whitespace-pre-wrap text-sm my-2 p-2")}>{value}</code>
     </pre>
   );
 };

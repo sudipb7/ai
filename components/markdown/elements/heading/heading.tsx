@@ -6,14 +6,14 @@ export const MarkdownHeading = ({
   text,
   className = "",
 }: MarkdownHeadingProps) => {
-  const initialStyles = "relative font-medium text-foreground";
+  const initialStyles = "relative font-medium text-foreground m-0.5";
 
   if (depth === 1) {
     return (
       <h2
         className={cn(
           initialStyles,
-          "scroll-m-20 text-2xl font-semibold tracking-tight",
+          "m-1 text-2xl font-semibold tracking-tight",
           className
         )}
       >
@@ -27,7 +27,7 @@ export const MarkdownHeading = ({
       <h3
         className={cn(
           initialStyles,
-          "scroll-m-20 text-xl font-semibold tracking-tight",
+          "text-xl font-semibold tracking-tight",
           className
         )}
       >
