@@ -3,12 +3,8 @@
 import * as React from "react";
 import { Message } from "ai";
 
-import { GoDotFill } from "react-icons/go";
-import { Check, Copy } from "lucide-react";
-
 import { useChatScroll } from "@/hooks/use-chat-scroll";
-import { cn } from "@/lib/utils";
-import { Markdown } from "@/components/markdown";
+import { ChatItem } from "./chat-item";
 
 interface ChatFeedProps {
   messages: Message[];
@@ -18,20 +14,11 @@ interface ChatFeedProps {
 export const ChatFeed = ({ messages = [], isLoading }: ChatFeedProps) => {
   const chatRef = React.useRef<HTMLDivElement>(null);
   const bottomRef = React.useRef<HTMLDivElement>(null);
-  const [isCopied, setIsCopied] = React.useState(false);
 
   const lastMessage = React.useMemo(() => {
     if (messages.length === 0) return 0;
     return messages[messages.length - 1].content.length;
   }, [messages]);
-
-  const handleCopy = React.useCallback((message: string) => {
-    navigator.clipboard.writeText(message);
-    setIsCopied(true);
-    setTimeout(() => {
-      setIsCopied(false);
-    }, 3000);
-  }, []);
 
   useChatScroll({
     isLoading,
@@ -56,44 +43,12 @@ export const ChatFeed = ({ messages = [], isLoading }: ChatFeedProps) => {
               message === messages[messages.length - 1];
 
             return (
-              <div
+              <ChatItem
                 key={message.id}
-                className={cn(
-                  "relative max-w-[90%] md:max-w-[80%] rounded-lg p-4 transition-all",
-                  isAI ? "mr-auto" : "ml-auto",
-                  isAI
-                    ? "bg-gradient-to-br from-muted via-secondary to-background dark:to-card border border-secondary"
-                    : "bg-gradient-to-br from-primary via-green-600 to-green-800"
-                )}
-              >
-                {isAI && !isLoading ? (
-                  <Markdown
-                    className="text-foreground/70"
-                    source={message.content || ""}
-                  />
-                ) : (
-                  <p className="text-sm md:text-base text-justify text-white tracking-wide transition-all">
-                    {message.content}
-                    {isIncomingResponse && (
-                      <GoDotFill className="h-1 w-1 bg-white rounded-full animate-ping mt-1" />
-                    )}
-                  </p>
-                )}
-                {isAI && (
-                  <button
-                    type="button"
-                    aria-label="Copy message"
-                    onClick={() => handleCopy(message.content)}
-                    className="absolute bottom-0 -right-8 bg-transparent outline-none border-none w-fit p-2"
-                  >
-                    {isCopied ? (
-                      <Check className="h-4 w-4 text-cyan-500" />
-                    ) : (
-                      <Copy className="h-4 w-4 text-[#8F8F8F]" />
-                    )}
-                  </button>
-                )}
-              </div>
+                message={message}
+                isAI={isAI}
+                isIncomingResponse={isIncomingResponse}
+              />
             );
           })}
       </div>
