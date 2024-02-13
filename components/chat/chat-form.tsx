@@ -29,10 +29,10 @@ export const ChatForm = ({
   };
 
   return (
-    <div className="w-full bg-offwhite dark:bg-card fixed bottom-0 inset-x-0 border border-border border-collapse">
+    <div className="w-full bg-offwhite dark:bg-card fixed bottom-0 inset-x-0 border border-border">
       <form
         onSubmit={handleFormSubmit}
-        className="w-full mx-auto max-w-4xl p-4 border-t border-x border-border z-[1]"
+        className="w-full mx-auto max-w-4xl p-4 border-x border-x-border z-[1]"
       >
         <div className="relative">
           <input
