@@ -4,9 +4,10 @@ import { type VariantProps, cva } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 import { Markdown } from "@/components/markdown";
+import { CopyButton } from "../copy-button";
 
 const chatItemVariants = cva(
-  "relative max-w-[90%] md:max-w-[80%] rounded-lg p-4 overflow-hidden transition-all",
+  "relative max-w-[95%] md:max-w-[85%] rounded-lg p-4 transition-all",
   {
     variants: {
       isAI: {
@@ -53,6 +54,12 @@ const ChatItem = React.forwardRef<HTMLDivElement, ChatItemProps>(
               Response is being generated...
             </p>
           </div>
+        )}
+        {isAI && !isIncomingResponse && (
+          <CopyButton
+            className="-mt-2.5"
+            content={message?.content}
+          />
         )}
       </>
     );

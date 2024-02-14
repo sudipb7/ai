@@ -37,7 +37,7 @@ export const MarkdownElement = ({
     if (parent.type === "paragraph") {
       if (element.type === "strong" && element.children[0].type === "text") {
         return (
-          <strong className="font-bold text-foreground/70">
+          <strong className="font-bold text-foreground/95">
             {element.children[0].value}
           </strong>
         );
@@ -96,7 +96,7 @@ export const MarkdownElement = ({
 
       if (element.type === "inlineCode") {
         return (
-          <code className="bg-muted dark:bg-slate-700 p-0.5 rounded">
+          <code className="bg-zinc-200 dark:bg-zinc-700 text-primary p-0.5 rounded">
             {element.value}
           </code>
         );
@@ -119,7 +119,7 @@ export const MarkdownElement = ({
               return (
                 <li
                   key={i}
-                  className="text-muted-foreground my-0.5 ml-5"
+                  className="text-foreground/85 my-0.5 ml-5"
                 >
                   <MarkdownElement element={child} />
                 </li>
@@ -145,7 +145,7 @@ export const MarkdownElement = ({
       element.children[0].children[0].type === "text"
     ) {
       return (
-        <p className="text-muted-foreground">
+        <p className="text-foreground/85">
           {/* @ts-ignore */}
           {element.children.map((child, i) => (
             <MarkdownElement
@@ -181,7 +181,7 @@ export const MarkdownElement = ({
 
   if (element.type === "paragraph") {
     return (
-      <p className="text-sm md:text-base text-muted-foreground">
+      <p className="text-sm md:text-base text-foreground/85">
         {/* @ts-ignore */}
         {element.children.map((child, i) => (
           <MarkdownElement
@@ -195,7 +195,7 @@ export const MarkdownElement = ({
   }
 
   if (element.type === "list") {
-    const listStyle = cn("ml-1 text-muted-foreground", {
+    const listStyle = cn("ml-1 text-foreground/85", {
       "list-descimal": element.ordered,
       "list-disc": !element.ordered,
     });
