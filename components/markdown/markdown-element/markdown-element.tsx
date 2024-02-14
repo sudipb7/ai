@@ -37,7 +37,7 @@ export const MarkdownElement = ({
     if (parent.type === "paragraph") {
       if (element.type === "strong" && element.children[0].type === "text") {
         return (
-          <strong className="font-bold text-foreground/95">
+          <strong className="font-semibold text-foreground/95">
             {element.children[0].value}
           </strong>
         );

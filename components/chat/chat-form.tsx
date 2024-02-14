@@ -1,6 +1,11 @@
-import { ChatRequestOptions } from "ai";
+"use client";
 
+import * as React from "react";
+import { ChatRequestOptions } from "ai";
 import { Loader, ArrowUp } from "lucide-react";
+
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 
 interface ChatFormProps {
   input: string;
@@ -22,41 +27,67 @@ export const ChatForm = ({
   handleSubmit,
   handleInputChange,
 }: ChatFormProps) => {
+  const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
+  const formRef = React.useRef<HTMLFormElement>(null);
+
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isLoading) return;
     handleSubmit(e);
   };
 
+  React.useEffect(() => {
+    const textArea = textAreaRef.current;
+    if (!textArea) return;
+    textArea.style.height = "55px";
+    let scrollHeight = textArea.scrollHeight;
+    textArea.style.height = `${scrollHeight + 1}px`;
+  }, [input]);
+
+  React.useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+        if (!formRef.current) return;
+        formRef.current.requestSubmit();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   return (
     <div className="w-full bg-offwhite dark:bg-card fixed bottom-0 inset-x-0 border border-border">
       <form
+        ref={formRef}
         onSubmit={handleFormSubmit}
-        className="w-full mx-auto max-w-4xl p-4 border-x border-x-border z-[1]"
+        className="w-full mx-auto max-w-4xl p-3 md:p-4 border-x border-x-border z-[1]"
       >
         <div className="relative">
-          <input
+          <Textarea
+            rows={1}
             value={input}
+            ref={textAreaRef}
             onChange={handleInputChange}
-            type="text"
             name="prompt"
             id="prompt"
-            autoComplete="off"
             placeholder="Ask anything..."
-            className="w-full p-4 pl-5 pr-16 bg-gradient-to-b from-muted via-secondary to-background dark:to-card rounded-full outline-none placeholder-muted-foreground border border-border focus:ring-offset-0 focus:ring-1 focus:ring-ring transition"
+            className="prompt-textarea w-full max-h-[230px] p-4 pr-12 text-sm bg-gradient-to-b from-muted via-secondary to-background dark:to-card rounded-lg outline-none placeholder-muted-foreground border border-border resize-none transition"
           />
-          <button
+          <Button
+            size="icon"
             disabled={input === ""}
             type="submit"
             aria-label="Send message"
-            className="p-2 rounded-full outline-none border border-transparent ring-1 ring-offset-0 ring-ring disabled:ring-0 disabled:border-border disabled:opacity-50 absolute bottom-2.5 right-3 z-[2] transition"
+            className="h-9 w-9 absolute bottom-2 right-2 z-[2] bg-gradient-to-br rounded-lg from-green-300 via-green-500 to-green-900 transition"
           >
             {isLoading ? (
-              <Loader className="h-5 w-5 text-primary animate-spin" />
+              <Loader className="h-4 w-4 text-white animate-spin" />
             ) : (
-              <ArrowUp className="h-5 w-5 text-primary" />
+              <ArrowUp className="h-4 w-4 text-white" />
             )}
-          </button>
+          </Button>
         </div>
       </form>
     </div>

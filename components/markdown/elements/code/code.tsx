@@ -1,6 +1,6 @@
 "use client";
 
-import "highlight.js/styles/atom-one-dark.css";
+import "highlight.js/styles/github-dark.css";
 
 import hljs from "highlight.js";
 import { useEffect } from "react";
@@ -29,10 +29,7 @@ export const MarkdownCode = ({ value, lang }: MarkdownCodeProps) => {
       <pre>
         <code className={cn(styles, "text-sm md:text-base")}>{value}</code>
       </pre>
-      <ScrollBar
-        className="bg-gray-400 dark:bg-gray-600 transition-all"
-        orientation="horizontal"
-      />
+      <ScrollBar orientation="horizontal" />
     </ScrollArea>
   );
 };

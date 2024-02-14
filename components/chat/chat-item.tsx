@@ -7,7 +7,7 @@ import { Markdown } from "@/components/markdown";
 import { CopyButton } from "../copy-button";
 
 const chatItemVariants = cva(
-  "relative max-w-[95%] md:max-w-[85%] rounded-lg p-4 transition-all",
+  "relative max-w-[95%] md:max-w-[85%] rounded-lg p-3 transition-all",
   {
     variants: {
       isAI: {

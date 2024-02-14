@@ -29,7 +29,7 @@ export const CopyButton = ({
       {...props}
       onClick={handleCopy}
       className={cn(
-        "cursor-pointer p-1.5 flex items-center text-muted-foreground transition",
+        "cursor-pointer p-1.5 flex items-center text-muted-foreground w-fit transition",
         className
       )}
     >
