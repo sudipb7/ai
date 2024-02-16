@@ -8,7 +8,7 @@ body,
   height: 100%;
 }
 
-.prompt-textarea::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 0px;
 }
 
