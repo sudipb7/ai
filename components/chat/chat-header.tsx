@@ -9,8 +9,8 @@ export const ChatHeader = () => {
     <header className="w-full fixed top-0 inset-x-0 z-[4] border-b border-b-border bg-offwhite/10 dark:dark:bg-zinc-950/10 backdrop-blur-xl">
       <div className="max-w-4xl mx-auto flex justify-between py-2 px-4 border-x border-x-border">
         <div className="bg-gradient-to-br from-green-200 via-green-500 to-green-900 bg-clip-text flex items-center gap-4 p-2">
-          <h1 className="text-xl md:text-2xl font-extrabold font-mono uppercase tracking-wider text-transparent">
-            AI Playground
+          <h1 className="bg-gradient-to-br from-green-500 to-green-900 bg-clip-text text-transparent text-xl md:text-2xl font-semibold p-2">
+            AI
           </h1>
         </div>
         <nav className="flex items-center gap-1">
