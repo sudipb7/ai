@@ -1,6 +1,6 @@
 "use client";
 
-import "highlight.js/styles/github-dark.css";
+import "highlight.js/styles/panda-syntax-dark.css";
 
 import hljs from "highlight.js";
 import { useEffect } from "react";

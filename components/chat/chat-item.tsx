@@ -4,16 +4,15 @@ import { type VariantProps, cva } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 import { Markdown } from "@/components/markdown";
-import { CopyButton } from "../copy-button";
+import { CopyButton } from "@/components/copy-button";
 
 const chatItemVariants = cva(
   "relative max-w-[95%] md:max-w-[85%] rounded-lg p-3 transition-all",
   {
     variants: {
       isAI: {
-        true: "mr-auto bg-gradient-to-br from-muted via-secondary to-background dark:to-card border border-secondary",
-        false:
-          "ml-auto bg-gradient-to-br from-primary via-green-600 to-green-800",
+        true: "mr-auto bg-zinc-200 dark:bg-zinc-900 border border-secondary",
+        false: "ml-auto bg-transparent border border-secondary",
       },
     },
     defaultVariants: {
@@ -41,7 +40,7 @@ const ChatItem = React.forwardRef<HTMLDivElement, ChatItemProps>(
             {...props}
           >
             {!isAI ? (
-              <p className="text-sm md:text-base text-justify text-white tracking-wide transition-all">
+              <p className="text-sm md:text-base text-justify transition-all">
                 {message?.content}
               </p>
             ) : (

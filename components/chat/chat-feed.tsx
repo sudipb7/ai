@@ -29,7 +29,7 @@ export const ChatFeed = ({ messages = [], isLoading }: ChatFeedProps) => {
 
   return (
     <div
-      className="bg-offwhite dark:bg-card flex flex-col w-full min-h-screen px-4 pt-20 pb-28"
+      className="bg-offwhite dark:bg-zinc-950 flex flex-col w-full min-h-screen px-4 pt-20 pb-28"
       ref={chatRef}
     >
       <div className="flex-1" />

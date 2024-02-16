@@ -58,7 +58,7 @@ export const ChatForm = ({
   }, []);
 
   return (
-    <div className="w-full bg-offwhite dark:bg-card fixed bottom-0 inset-x-0 border border-border">
+    <div className="w-full bg-offwhite dark:bg-zinc-950 fixed bottom-0 inset-x-0 border border-border">
       <form
         ref={formRef}
         onSubmit={handleFormSubmit}
@@ -73,14 +73,14 @@ export const ChatForm = ({
             name="prompt"
             id="prompt"
             placeholder="Ask anything..."
-            className="prompt-textarea w-full max-h-[230px] p-4 pr-12 text-sm bg-gradient-to-b from-muted via-secondary to-background dark:to-card rounded-lg outline-none placeholder-muted-foreground border border-border resize-none transition"
+            className="prompt-textarea w-full max-h-[230px] p-4 pr-12 text-sm bg-secondary dark:bg-zinc-900 rounded-lg outline-none placeholder-muted-foreground border border-border resize-none transition"
           />
           <Button
             size="icon"
             disabled={input === ""}
             type="submit"
             aria-label="Send message"
-            className="h-9 w-9 absolute bottom-2 right-2 z-[2] bg-gradient-to-br rounded-lg from-green-300 via-green-500 to-green-900 transition"
+            className="h-9 w-9 absolute bottom-2 right-2 z-[2] bg-primary rounded-lg transition"
           >
             {isLoading ? (
               <Loader className="h-4 w-4 text-white animate-spin" />
