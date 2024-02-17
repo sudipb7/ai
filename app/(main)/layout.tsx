@@ -1,4 +1,5 @@
 import { MainHeader } from "@/components/main-header";
+import { ModalProvider } from "@/components/providers/modal-provider";
 
 export default function MainLayout({
   children,
@@ -12,6 +13,7 @@ export default function MainLayout({
         <div className="h-full relative">
           <MainHeader />
           {children}
+          <ModalProvider />
         </div>
       </div>
     </div>

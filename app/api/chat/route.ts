@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { GoogleGenerativeAIStream, Message, StreamingTextResponse } from "ai";
 
@@ -18,14 +19,19 @@ const buildGoogleGenAIPrompt = (messages: Message[]) => ({
 });
 
 export async function POST(req: Request) {
-  const { messages } = await req.json();
+  try {
+    const { messages } = await req.json();
 
-  const geminiStream = await genAI
-    .getGenerativeModel({ model: "gemini-pro" })
-    .generateContentStream(buildGoogleGenAIPrompt(messages));
+    const geminiStream = await genAI
+      .getGenerativeModel({ model: "gemini-pro" })
+      .generateContentStream(buildGoogleGenAIPrompt(messages));
 
-  // Convert the response into a friendly text-stream
-  const stream = GoogleGenerativeAIStream(geminiStream);
+    // Convert the response into a friendly text-stream
+    const stream = GoogleGenerativeAIStream(geminiStream);
 
-  return new StreamingTextResponse(stream);
+    return new StreamingTextResponse(stream);
+  } catch (error) {
+    console.log("CHAT_POST", error);
+    return new NextResponse("Internal Error", { status: 500 });
+  }
 }

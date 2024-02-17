@@ -1,9 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import { Github, Twitter } from "lucide-react";
 
 import { MotionDiv, MotionNav } from "./motion";
+import { Button } from "@/components/ui/button";
+import { useModal } from "@/hooks/use-modal-store";
 
 export const MainHeader = () => {
+  const { onOpen } = useModal();
   return (
     <header className="sticky inset-x-0 top-0 z-20 w-full h-16 backdrop-blur-2xl px-4 sm:px-10 md:px-20 lg:px-24 flex items-center justify-between">
       <MotionDiv
@@ -16,8 +21,16 @@ export const MainHeader = () => {
       <MotionNav
         initial={{ translateX: 20, opacity: 0 }}
         animate={{ translateX: 0, opacity: 1 }}
-        className="flex items-center gap-4 p-2"
+        className="flex items-center gap-2 md:gap-4 p-2"
       >
+        <Button
+          size="sm"
+          variant="ghost"
+          className="bg-transparent hover:bg-transparent text-white"
+          onClick={() => onOpen("feedback")}
+        >
+          Feedback
+        </Button>
         <Link
           href="https://twitter.com/SudipB7_"
           target="_blank"
