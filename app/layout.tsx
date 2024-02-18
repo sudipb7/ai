@@ -13,7 +13,8 @@ const font = Poppins({
 
 export const metadata: Metadata = {
   title: "AI Labs",
-  description: "AI Labs is a place where you can try multiple AI models as a chatbot and see how they work.",
+  description:
+    "AI Labs is a place where you can try multiple AI models as a chatbot and see how they work.",
 };
 
 export default function RootLayout({
@@ -31,7 +32,7 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="dark"
           storageKey="ai-labs"
-          enableSystem
+          forcedTheme="dark"
         >
           {children}
           <Toaster />

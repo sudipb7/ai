@@ -62,14 +62,12 @@ export default function Home() {
         >
           <Button
             asChild
-            size="lg"
             className="text-white"
           >
             <Link href="/chat">Get Started</Link>
           </Button>
           <Button
             asChild
-            size="lg"
             variant="secondary"
             className="bg-zinc-800 hover:bg-zinc-900 text-white"
           >
@@ -85,7 +83,7 @@ export default function Home() {
           </Button>
         </MotionDiv>
       </section>
-      <div className="w-full">
+      <section className="w-full">
         <CardSpotlight
           initial={{ opacity: 0, scale: 0, translateY: 20 }}
           animate={{ opacity: 1, scale: 1, translateY: 0 }}
@@ -100,8 +98,27 @@ export default function Home() {
             height={500}
           />
         </CardSpotlight>
-        <div className="h-20"></div>
-      </div>
+      </section>
+      <footer className="max-sm:text-sm w-full px-4 py-6 text-zinc-300 text-center">
+        Built by{" "}
+        <Link
+          href="https://twitter.com/SudipB7_"
+          target="_blank"
+          rel="noreferrer noopener"
+          className="underline text-white"
+        >
+          Sudip Biswas.
+        </Link>{" "}
+        The source code is available on{" "}
+        <Link
+          href="https://github.com/sudipb7/ai-labs"
+          target="_blank"
+          rel="noreferrer noopener"
+          className="underline text-white"
+        >
+          GitHub.
+        </Link>
+      </footer>
     </main>
   );
 }

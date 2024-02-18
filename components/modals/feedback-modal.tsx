@@ -191,7 +191,7 @@ export const FeedbackModal = () => {
                     defaultValue={field.value}
                   >
                     <FormControl>
-                      <SelectTrigger>
+                      <SelectTrigger disabled={isSubmitting}>
                         {field.value ? getCurrentTopic() : "Select one"}
                       </SelectTrigger>
                     </FormControl>

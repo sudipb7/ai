@@ -1,12 +1,12 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
 import { MarkdownElementProps } from "./markdown-element.type";
-import { MarkdownHeading } from "../elements/heading";
-import { MarkdownCode } from "../elements/code";
-import Image from "next/image";
+import { MarkdownHeading } from "@/components/markdown/elements/heading";
+import { MarkdownCode } from "@/components/markdown/elements/code";
 
 export const MarkdownElement = ({
   element,
