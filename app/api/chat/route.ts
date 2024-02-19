@@ -9,9 +9,7 @@ export const runtime = "edge";
 
 const buildGoogleGenAIPrompt = (messages: Message[]) => ({
   contents: messages
-    .filter(
-      (message) => message.role === "user" || message.role === "assistant"
-    )
+    .filter((message) => message.role === "user" || message.role === "assistant")
     .map((message) => ({
       role: message.role === "user" ? "user" : "model",
       parts: [{ text: message.content }],

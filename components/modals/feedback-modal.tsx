@@ -25,12 +25,7 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
-import {
-  Select,
-  SelectItem,
-  SelectContent,
-  SelectTrigger,
-} from "@/components/ui/select";
+import { Select, SelectItem, SelectContent, SelectTrigger } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -39,14 +34,7 @@ const formSchema = z.object({
   name: z.string().min(1, "Required"),
   subject: z.string().min(1, "Required"),
   description: z.string().min(1, "Required"),
-  topic: z.enum([
-    "FEATURE_REQUEST",
-    "COLLABORATION",
-    "IMPROVEMENT",
-    "BUG",
-    "HELP",
-    "OTHER",
-  ]),
+  topic: z.enum(["FEATURE_REQUEST", "COLLABORATION", "IMPROVEMENT", "BUG", "HELP", "OTHER"]),
 });
 
 const topicMap = [
@@ -103,8 +91,7 @@ export const FeedbackModal = () => {
       await axios.post("/api/feedback", values);
       toast({
         title: "Feedback received!",
-        description:
-          "Thanks for your feedback! We'll review it and reach out soon.",
+        description: "Thanks for your feedback! We'll review it and reach out soon.",
       });
       handleClose();
     } catch (error) {
@@ -118,32 +105,24 @@ export const FeedbackModal = () => {
   }
 
   const getCurrentTopic = () => {
-    const filtered = topicMap.filter(
-      (elem) => elem.value === form.getValues("topic")
-    );
+    const filtered = topicMap.filter((elem) => elem.value === form.getValues("topic"));
     return filtered[0].label;
   };
 
   return (
-    <Dialog
-      open={isModalOpen}
-      onOpenChange={handleClose}
-    >
+    <Dialog open={isModalOpen} onOpenChange={handleClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="text-2xl text-primary tracking-wide">
+          <DialogTitle className="text-2xl tracking-wide primary_gradient">
             Your Feedback Matters
           </DialogTitle>
           <DialogDescription className="max-sm:text-xs font-medium tracking-wide mt-2">
-            Your feedback matters! Help us improve our service by sharing your
-            thoughts. Your insights will be used to enhance your experience.
+            Your feedback matters! Help us improve our service by sharing your thoughts. Your
+            insights will be used to enhance your experience.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
               control={form.control}
               name="name"
@@ -186,21 +165,15 @@ export const FeedbackModal = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Topic</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger>
+                      <SelectTrigger disabled={isSubmitting}>
                         {field.value ? getCurrentTopic() : "Select one"}
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
                       {topicMap.map(({ value, label }) => (
-                        <SelectItem
-                          key={value}
-                          value={value}
-                        >
+                        <SelectItem key={value} value={value}>
                           {label}
                         </SelectItem>
                       ))}
@@ -233,11 +206,9 @@ export const FeedbackModal = () => {
               <Button
                 disabled={isSubmitting}
                 type="submit"
-                className="flex items-center text-white"
+                className="btn_gradient flex items-center"
               >
-                {isSubmitting && (
-                  <Loader className="h-4 w-4 animate-spin mr-2" />
-                )}
+                {isSubmitting && <Loader className="h-4 w-4 animate-spin mr-2" />}
                 Submit
               </Button>
             </DialogFooter>

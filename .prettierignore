@@ -1,0 +1,57 @@
+# Ignore generated files
+node_modules/
+.next/
+
+# Ignore configuration files
+.env*
+.gitignore
+yarn.lock
+package-lock.json
+
+# Ignore editor-specific files
+*.suo
+*.mdb
+*.sln
+*.sbproj
+*.csproj
+*.user
+*.userconfig
+*.sln
+*.swp
+*.project
+*.workspace
+*.xcodeproj
+*.ds_store
+
+# Ignore IDE-generated files
+*.iml
+*.ipr
+*.iws
+*.ihtml
+*.ihtml.bak
+*.iws.vcdb
+*.tmp
+*.log
+*.bak
+*.swp
+*.scc
+*.sct
+*.solution
+*.suo
+*.user
+*.userconfig
+*.userprefs
+*.session
+*.settings
+*.cache
+*.hgtags
+
+# Ignore build artifacts
+dist/
+out/
+build/
+
+# Ignore temporary files
+*.tmp
+*.swp
+npx-sh/

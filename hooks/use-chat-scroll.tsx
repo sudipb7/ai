@@ -7,20 +7,14 @@ interface useChatScrollProps {
   bottomRef: React.RefObject<HTMLDivElement>;
 }
 
-export function useChatScroll({
-  isLoading,
-  chatRef,
-  bottomRef,
-  lastMessage,
-}: useChatScrollProps) {
+export function useChatScroll({ isLoading, chatRef, bottomRef, lastMessage }: useChatScrollProps) {
   React.useEffect(() => {
     const shouldAutoScroll = () => {
       const topDiv = chatRef?.current;
 
       if (!topDiv) return false;
 
-      const distanceFromBottom =
-        topDiv.scrollHeight - topDiv.scrollTop - topDiv.clientHeight;
+      const distanceFromBottom = topDiv.scrollHeight - topDiv.scrollTop - topDiv.clientHeight;
 
       return distanceFromBottom <= 100 && isLoading;
     };

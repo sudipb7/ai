@@ -9,10 +9,7 @@ export const Markdown = ({ source, ...props }: MarkdownProps) => {
   return (
     <div {...props} className="space-y-1.5 md:space-y-2">
       {markdownTree.map((node, index) => (
-        <MarkdownElement
-          key={index}
-          element={node}
-        />
+        <MarkdownElement key={index} element={node} />
       ))}
     </div>
   );

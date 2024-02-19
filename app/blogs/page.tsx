@@ -1,3 +1,7 @@
+export const metadata = {
+  title: "Blog",
+};
+
 export default function BlogsPage() {
   return (
     <main className="h-[calc(100vh-4rem)] w-full flex items-center justify-center">
