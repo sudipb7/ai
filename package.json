@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|html|css|scss)\""
   },
   "dependencies": {
     "@google/generative-ai": "^0.2.0",
@@ -27,7 +28,6 @@
     "lucide-react": "^0.323.0",
     "mdast-util-from-markdown": "^2.0.0",
     "next": "14.1.0",
-    "next-themes": "^0.2.1",
     "nodemailer": "^6.9.9",
     "react": "^18",
     "react-dom": "^18",
@@ -49,6 +49,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
     "postcss": "^8",
+    "prettier": "^3.2.5",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }

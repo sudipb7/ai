@@ -11,27 +11,25 @@ import { Button } from "@/components/ui/button";
 interface ChatFormProps {
   input: string;
   isLoading: boolean;
+  formRef: React.RefObject<HTMLFormElement>;
   textAreaRef: React.RefObject<HTMLTextAreaElement>;
   handleSubmit: (
     e: React.FormEvent<HTMLFormElement>,
-    chatRequestOptions?: ChatRequestOptions | undefined
+    chatRequestOptions?: ChatRequestOptions | undefined,
   ) => void;
   handleInputChange: (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
   ) => void;
 }
 
 export const ChatForm = ({
   input,
+  formRef,
   isLoading,
   textAreaRef,
   handleSubmit,
   handleInputChange,
 }: ChatFormProps) => {
-  const formRef = React.useRef<HTMLFormElement>(null);
-  
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isLoading) return;
@@ -43,7 +41,8 @@ export const ChatForm = ({
     textAreaRef.current.style.height = "55px";
     let scrollHeight = textAreaRef.current.scrollHeight;
     textAreaRef.current.style.height = `${scrollHeight + 1}px`;
-  }, [input, textAreaRef]);
+    // eslint-disable-next-line
+  }, [textAreaRef.current?.value]);
 
   React.useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
@@ -60,7 +59,7 @@ export const ChatForm = ({
   }, [formRef]);
 
   return (
-    <div className="w-full bg-offwhite dark:bg-zinc-950 fixed bottom-0 inset-x-0">
+    <div className="w-full bg-zinc-950 fixed bottom-0 inset-x-0">
       <motion.form
         initial={{ opacity: 0, translateY: 40 }}
         animate={{ opacity: 1, translateY: 0 }}
@@ -78,19 +77,19 @@ export const ChatForm = ({
             name="prompt"
             id="prompt"
             placeholder="Ask anything..."
-            className="w-full max-h-[230px] p-4 pr-12 text-sm bg-transparent rounded-lg outline-none placeholder-muted-foreground resize-none transition"
+            className="w-full max-h-[230px] p-4 pr-12 text-sm bg-transparent rounded-xl outline-none placeholder-muted resize-none focus-visible:ring-0 transition"
           />
           <Button
             size="icon"
             disabled={input === ""}
             type="submit"
             aria-label="Send message"
-            className="h-9 w-9 absolute bottom-2 right-2 z-[2] bg-primary rounded-lg transition"
+            className="h-9 w-9 absolute bottom-2 right-2 z-[2] transition"
           >
             {isLoading ? (
-              <Loader className="h-4 w-4 text-white animate-spin" />
+              <Loader className="h-4 w-4 animate-spin" />
             ) : (
-              <ArrowUp className="h-4 w-4 text-white" />
+              <ArrowUp className="h-4 w-4" />
             )}
           </Button>
         </div>

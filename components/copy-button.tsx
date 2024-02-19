@@ -11,12 +11,7 @@ interface CopyButtonProps extends React.ComponentPropsWithRef<"button"> {
   hideText?: boolean;
 }
 
-export const CopyButton = ({
-  content,
-  hideText = false,
-  className,
-  ...props
-}: CopyButtonProps) => {
+export const CopyButton = ({ content, hideText = false, className, ...props }: CopyButtonProps) => {
   const { isCopied, copyToClipboard } = useCopy();
 
   const handleCopy = () => {
@@ -30,7 +25,7 @@ export const CopyButton = ({
       onClick={handleCopy}
       className={cn(
         "cursor-pointer p-1.5 flex items-center text-muted-foreground w-fit transition",
-        className
+        className,
       )}
     >
       {isCopied ? (

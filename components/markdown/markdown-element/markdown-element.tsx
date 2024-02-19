@@ -8,18 +8,10 @@ import { MarkdownElementProps } from "./markdown-element.type";
 import { MarkdownHeading } from "@/components/markdown/elements/heading";
 import { MarkdownCode } from "@/components/markdown/elements/code";
 
-export const MarkdownElement = ({
-  element,
-  parent = null,
-}: MarkdownElementProps) => {
+export const MarkdownElement = ({ element, parent = null }: MarkdownElementProps) => {
   if (parent) {
     if (parent.type === "heading" && element.type === "text") {
-      return (
-        <MarkdownHeading
-          depth={parent.depth}
-          text={element.value}
-        />
-      );
+      return <MarkdownHeading depth={parent.depth} text={element.value} />;
     }
 
     if (
@@ -27,19 +19,13 @@ export const MarkdownElement = ({
       element.type === "paragraph" &&
       element.children[0].type === "text"
     ) {
-      return (
-        <p className="relative mt-4 border-l-2 pl-6 italic">
-          {element.children[0].value}
-        </p>
-      );
+      return <p className="relative mt-4 border-l-2 pl-6 italic">{element.children[0].value}</p>;
     }
 
     if (parent.type === "paragraph") {
       if (element.type === "strong" && element.children[0].type === "text") {
         return (
-          <strong className="font-semibold text-foreground/95">
-            {element.children[0].value}
-          </strong>
+          <strong className="font-semibold text-foreground/95">{element.children[0].value}</strong>
         );
       }
 
@@ -51,18 +37,12 @@ export const MarkdownElement = ({
             className="no-underline hover:underline inline-block"
           >
             <span>{element.children[0].value}</span>
-            <ExternalLink
-              className="inline-block ml-1"
-              size={16}
-            />
+            <ExternalLink className="inline-block ml-1" size={16} />
           </Link>
         );
       }
 
-      if (
-        element.type === "link" &&
-        element.children[0].children[0].type === "text"
-      ) {
+      if (element.type === "link" && element.children[0].children[0].type === "text") {
         return (
           <Link
             href={element.url}
@@ -70,10 +50,7 @@ export const MarkdownElement = ({
             className="no-underline hover:underline inline-block"
           >
             <span>{element.children[0].value}</span>
-            <ExternalLink
-              className="inline-block ml-1"
-              size={16}
-            />
+            <ExternalLink className="inline-block ml-1" size={16} />
           </Link>
         );
       }
@@ -95,11 +72,7 @@ export const MarkdownElement = ({
       }
 
       if (element.type === "inlineCode") {
-        return (
-          <code className="bg-zinc-200 dark:bg-zinc-700 text-primary p-0.5 rounded">
-            {element.value}
-          </code>
-        );
+        return <code className="bg-[#282C34] py-0.5 px-1 rounded">{element.value}</code>;
       }
 
       return (
@@ -117,22 +90,14 @@ export const MarkdownElement = ({
           {element.children.map((child, i) => {
             if (child.type === "paragraph") {
               return (
-                <li
-                  key={i}
-                  className="text-foreground/85 my-0.5 ml-5"
-                >
+                <li key={i} className="text-foreground/85 my-0.5 ml-5">
                   <MarkdownElement element={child} />
                 </li>
               );
             }
 
             if (child.type === "list") {
-              return (
-                <MarkdownElement
-                  key={i}
-                  element={child}
-                />
-              );
+              return <MarkdownElement key={i} element={child} />;
             }
           })}
         </>
@@ -148,11 +113,7 @@ export const MarkdownElement = ({
         <p className="text-foreground/85">
           {/* @ts-ignore */}
           {element.children.map((child, i) => (
-            <MarkdownElement
-              key={i}
-              parent={element}
-              element={child}
-            />
+            <MarkdownElement key={i} parent={element} element={child} />
           ))}
         </p>
       );
@@ -171,12 +132,7 @@ export const MarkdownElement = ({
   }
 
   if (element.type === "heading" || element.type === "blockquote") {
-    return (
-      <MarkdownElement
-        parent={element}
-        element={element.children[0]}
-      />
-    );
+    return <MarkdownElement parent={element} element={element.children[0]} />;
   }
 
   if (element.type === "paragraph") {
@@ -184,11 +140,7 @@ export const MarkdownElement = ({
       <p className="text-sm md:text-base text-foreground/85">
         {/* @ts-ignore */}
         {element.children.map((child, i) => (
-          <MarkdownElement
-            key={i}
-            parent={element}
-            element={child}
-          />
+          <MarkdownElement key={i} parent={element} element={child} />
         ))}
       </p>
     );
@@ -203,23 +155,14 @@ export const MarkdownElement = ({
       <ul className={listStyle}>
         {/* @ts-ignore */}
         {element.children.map((child, i) => (
-          <MarkdownElement
-            key={i}
-            parent={element}
-            element={child}
-          />
+          <MarkdownElement key={i} parent={element} element={child} />
         ))}
       </ul>
     );
   }
 
   if (element.type === "code") {
-    return (
-      <MarkdownCode
-        lang={element.lang}
-        value={element.value}
-      />
-    );
+    return <MarkdownCode lang={element.lang} value={element.value} />;
   }
 
   return (

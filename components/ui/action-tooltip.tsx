@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface ActionTooltipProps {
   label: string;
@@ -14,20 +9,12 @@ interface ActionTooltipProps {
   align?: "start" | "center" | "end";
 }
 
-export const ActionTooltip = ({
-  label,
-  children,
-  side,
-  align,
-}: ActionTooltipProps) => {
+export const ActionTooltip = ({ label, children, side, align }: ActionTooltipProps) => {
   return (
     <TooltipProvider>
       <Tooltip delayDuration={50}>
         <TooltipTrigger asChild>{children}</TooltipTrigger>
-        <TooltipContent
-          side={side}
-          align={align}
-        >
+        <TooltipContent side={side} align={align}>
           <p className="font-medium text-sm">{label}</p>
         </TooltipContent>
       </Tooltip>
