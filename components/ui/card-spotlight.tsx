@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion, MotionAdvancedProps, MotionProps } from "framer-motion";
+import { motion, MotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface SpotlightCardProps extends MotionProps {

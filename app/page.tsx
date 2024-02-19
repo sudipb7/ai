@@ -2,6 +2,7 @@ import { Github, Sparkles } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
+import { siteConfig } from "@/lib/config/site-config";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { CardSpotlight } from "@/components/ui/card-spotlight";
@@ -62,7 +63,7 @@ export default function Home() {
           <Button asChild variant="secondary">
             <Link
               className="flex items-center"
-              href="https://github.com/sudipb7/ai-labs"
+              href={siteConfig.links.github}
               target="_blank"
               rel="noreferrer noopener"
             >
@@ -98,7 +99,7 @@ export default function Home() {
       >
         Built by{" "}
         <Link
-          href="https://twitter.com/SudipB7_"
+          href={siteConfig.links.twitter}
           target="_blank"
           rel="noreferrer noopener"
           className="underline text-white"
@@ -107,7 +108,7 @@ export default function Home() {
         </Link>{" "}
         The source code is available on{" "}
         <Link
-          href="https://github.com/sudipb7/ai-labs"
+          href={siteConfig.links.github}
           target="_blank"
           rel="noreferrer noopener"
           className="underline text-white"

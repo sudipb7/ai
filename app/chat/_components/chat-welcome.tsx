@@ -1,25 +1,15 @@
-"use client";
-
-import * as React from "react";
+import Image from "next/image";
 import { ArrowUp } from "lucide-react";
 
-import { MotionH2 } from "@/components/motion";
+import { MotionDiv } from "@/components/motion";
 import { ActionTooltip } from "@/components/ui/action-tooltip";
 import { Button } from "@/components/ui/button";
 import { CardSpotlight } from "@/components/ui/card-spotlight";
 
 const prompts = [
   {
-    title: "Write an email",
-    subtitle: "to your boss about your project.",
-  },
-  {
     title: "Help me dubug",
     subtitle: "a linked list problem in C++.",
-  },
-  {
-    title: "Prepare a roadmap",
-    subtitle: "for a software developer role.",
   },
   {
     title: "Write a text message",
@@ -46,74 +36,56 @@ export const ChatWelcome = ({
   handleChange,
   textAreaRef,
 }: ChatWelcomeProps) => {
-  const [windowSize, setWindowSize] = React.useState(window.innerWidth);
-
-  const sendPrompt = React.useCallback(
-    ({ title, subtitle }: (typeof prompts)[0]) => {
-      if (!textAreaRef.current) return;
-      const textArea = textAreaRef.current;
-      textArea.value = `${title} ${subtitle}`;
-      handleChange({ target: { value: textArea.value } } as any);
-      setTimeout(() => formRef.current?.requestSubmit(), 0);
-    },
-    [formRef, handleChange, textAreaRef],
-  );
-
-  React.useEffect(() => {
-    function handleResize() {
-      setWindowSize(window.innerWidth);
-    }
-
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const sendPrompt = ({ title, subtitle }: (typeof prompts)[0]) => {
+    if (!textAreaRef.current) return;
+    const textArea = textAreaRef.current;
+    textArea.value = `${title} ${subtitle}`;
+    handleChange({ target: { value: textArea.value } } as any);
+    setTimeout(() => formRef.current?.requestSubmit(), 0);
+  };
 
   return (
     <section className="w-full flex-1 flex flex-col">
-      <div className="flex-1 grid place-items-center">
-        <MotionH2
-          initial={initial}
-          animate={animate}
-          className="primary_gradient text-center text-2xl md:text-3xl font-semibold"
-        >
-          Hello! How can I help you?
-        </MotionH2>
-      </div>
+      <MotionDiv
+        initial={initial}
+        animate={animate}
+        className="flex-1 flex flex-col items-center justify-center"
+      >
+        <Image src="/logo.svg" alt="AI logo" width={130} height={130} />
+        <h2 className="primary_gradient text-center text-2xl md:text-3xl font-semibold">
+          How can I help you today?
+        </h2>
+      </MotionDiv>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 p-2 gap-3 md:gap-5">
-        {prompts.map((prompt, i) => {
-          if (windowSize < 768 && i > 1) return null;
-
-          return (
-            <CardSpotlight
-              key={i}
-              hoverEffect
-              initial={initial}
-              animate={animate}
-              transition={{ delay: i * 0.1 }}
-              className="col-span-1 p-0 bg-transparent"
+        {prompts.map((prompt, i) => (
+          <CardSpotlight
+            key={i}
+            hoverEffect
+            initial={initial}
+            animate={animate}
+            transition={{ delay: i * 0.1 }}
+            className="col-span-1 p-0 bg-transparent"
+          >
+            <div
+              onClick={() => sendPrompt(prompt)}
+              className="cursor-pointer flex items-center justify-between p-4"
             >
-              <div
-                onClick={() => sendPrompt(prompt)}
-                className="cursor-pointer flex items-center justify-between p-4"
-              >
-                <div className="space-y-1.5">
-                  <p className="text-sm font-medium">{prompt.title}</p>
-                  <p className="text-xs font-light text-zinc-400">{prompt.subtitle}</p>
-                </div>
-                <ActionTooltip label="Use this prompt">
-                  <Button
-                    size="icon"
-                    variant="outline"
-                    className="hidden group-hover:inline-flex rounded-xl"
-                  >
-                    <ArrowUp className="h-4 w-4" />
-                  </Button>
-                </ActionTooltip>
+              <div className="space-y-1.5">
+                <p className="text-sm font-medium">{prompt.title}</p>
+                <p className="text-xs font-light text-zinc-400">{prompt.subtitle}</p>
               </div>
-            </CardSpotlight>
-          );
-        })}
+              <ActionTooltip label="Use this prompt">
+                <Button
+                  size="icon"
+                  variant="outline"
+                  className="hidden group-hover:inline-flex rounded-xl"
+                >
+                  <ArrowUp className="h-4 w-4" />
+                </Button>
+              </ActionTooltip>
+            </div>
+          </CardSpotlight>
+        ))}
       </div>
     </section>
   );

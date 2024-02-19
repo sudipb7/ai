@@ -6,17 +6,14 @@ import { Poppins } from "next/font/google";
 import { ModalProvider } from "@/components/providers/modal-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { Header } from "@/components/header";
+import { metadataConfig } from "@/lib/config/metadata";
 
 const font = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
-export const metadata: Metadata = {
-  title: "AI Labs",
-  description:
-    "AI Labs is a place where you can try multiple AI models as a chatbot and see how they work.",
-};
+export const metadata: Metadata = metadataConfig;
 
 export default function RootLayout({
   children,

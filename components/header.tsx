@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 import { useModal } from "@/hooks/use-modal-store";
 
@@ -17,9 +18,8 @@ export const Header = () => {
           href="/"
           initial={{ translateX: -20, opacity: 0 }}
           animate={{ translateX: 0, opacity: 1 }}
-          className="primary_gradient text-xl md:text-2xl font-semibold p-2"
         >
-          AI
+          <Image src="/logo.svg" alt="AI logo" width={80} height={80} />
         </MotionLink>
         <MotionDiv
           initial={{ translateX: 20, opacity: 0 }}
