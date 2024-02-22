@@ -19,7 +19,7 @@ export const MarkdownElement = ({ element, parent = null }: MarkdownElementProps
       element.type === "paragraph" &&
       element.children[0].type === "text"
     ) {
-      return <p className="relative mt-4 border-l-2 pl-6 italic">{element.children[0].value}</p>;
+      return <p className="relative mt-3 border-l-2 pl-6 italic">{element.children[0].value}</p>;
     }
 
     if (parent.type === "paragraph") {
@@ -75,12 +75,7 @@ export const MarkdownElement = ({ element, parent = null }: MarkdownElementProps
         return <code className="bg-[#282C34] py-0.5 px-1 rounded">{element.value}</code>;
       }
 
-      return (
-        <>
-          <p className="text-red-500">ERROR: Unsupported element</p>
-          <pre>{JSON.stringify(element, null, 2)}</pre>
-        </>
-      );
+      return <pre>{element}</pre>;
     }
 
     if (element.type === "listItem") {
@@ -90,7 +85,7 @@ export const MarkdownElement = ({ element, parent = null }: MarkdownElementProps
           {element.children.map((child, i) => {
             if (child.type === "paragraph") {
               return (
-                <li key={i} className="text-foreground/85 my-0.5 ml-5">
+                <li key={i} className="text-foreground/85 my-0.5 ml-3">
                   <MarkdownElement element={child} />
                 </li>
               );
@@ -119,12 +114,7 @@ export const MarkdownElement = ({ element, parent = null }: MarkdownElementProps
       );
     }
 
-    return (
-      <>
-        <p className="text-red-500">ERROR: Unsupported element</p>
-        <pre>{JSON.stringify(element, null, 2)}</pre>
-      </>
-    );
+    return <p>{element}</p>;
   }
 
   if (element.type === "thematicBreak") {
@@ -165,10 +155,5 @@ export const MarkdownElement = ({ element, parent = null }: MarkdownElementProps
     return <MarkdownCode lang={element.lang} value={element.value} />;
   }
 
-  return (
-    <>
-      <p className="text-red-500">ERROR: Unsupported element</p>
-      <pre>{JSON.stringify(element, null, 2)}</pre>
-    </>
-  );
+  return <pre>{element}</pre>;
 };

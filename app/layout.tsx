@@ -1,6 +1,6 @@
 import "./globals.css";
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 
 import { ModalProvider } from "@/components/providers/modal-provider";
@@ -15,6 +15,13 @@ const font = Poppins({
 
 export const metadata: Metadata = metadataConfig;
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1.0,
+  userScalable: false,
+  colorScheme: "dark",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,7 +33,7 @@ export default function RootLayout({
         <div className="h-full">
           <div className="background"></div>
           <div className="fixed z-10 inset-0 overflow-y-scroll overflow-x-hidden">
-            <div className="h-full relative">
+            <div className="min-h-full relative">
               <Header />
               {children}
               <ModalProvider />

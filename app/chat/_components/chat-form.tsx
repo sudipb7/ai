@@ -3,7 +3,6 @@
 import * as React from "react";
 import { ChatRequestOptions } from "ai";
 import { Loader, ArrowUp } from "lucide-react";
-import { motion } from "framer-motion";
 
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -33,14 +32,18 @@ export const ChatForm = ({
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isLoading) return;
+    if (textAreaRef.current) {
+      textAreaRef.current.style.height = "55px";
+    }
     handleSubmit(e);
   };
 
   React.useEffect(() => {
-    if (!textAreaRef.current) return;
-    textAreaRef.current.style.height = "55px";
-    let scrollHeight = textAreaRef.current.scrollHeight;
-    textAreaRef.current.style.height = `${scrollHeight + 1}px`;
+    const textArea = textAreaRef.current;
+    if (!textArea) return;
+    textArea.style.height = "55px";
+    let scrollHeight = textArea.scrollHeight;
+    textArea.style.height = `${scrollHeight + 1}px`;
     // eslint-disable-next-line
   }, [textAreaRef.current?.value]);
 
@@ -59,16 +62,13 @@ export const ChatForm = ({
   }, [formRef]);
 
   return (
-    <div className="w-full bg-zinc-950 fixed bottom-0 inset-x-0">
-      <motion.form
-        initial={{ opacity: 0, translateY: 40 }}
-        animate={{ opacity: 1, translateY: 0 }}
-        transition={{ delay: 0.4 }}
+    <section className="animate_in bg-zinc-950 fixed bottom-0 inset-x-0">
+      <form
         ref={formRef}
         onSubmit={handleFormSubmit}
-        className="w-full mx-auto max-w-4xl p-3 md:p-4 z-[1]"
+        className="mx-auto max-w-4xl w-full p-3 md:p-4"
       >
-        <div className="relative">
+        <div className="relative w-full">
           <Textarea
             rows={1}
             value={input}
@@ -84,7 +84,7 @@ export const ChatForm = ({
             disabled={input === ""}
             type="submit"
             aria-label="Send message"
-            className="h-9 w-9 absolute bottom-2 right-2 z-[2] transition"
+            className="h-9 w-9 absolute bottom-2 right-2 transition"
           >
             {isLoading ? (
               <Loader className="h-4 w-4 animate-spin" />
@@ -93,7 +93,7 @@ export const ChatForm = ({
             )}
           </Button>
         </div>
-      </motion.form>
-    </div>
+      </form>
+    </section>
   );
 };

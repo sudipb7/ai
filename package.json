@@ -1,7 +1,11 @@
 {
-  "name": "gemini-nextjs",
-  "version": "0.1.0",
+  "name": "ai",
+  "version": "0.2.0",
   "private": true,
+  "author": {
+    "name": "Sudip Biswas",
+    "url": "https://twitter.com/sudipb7_"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

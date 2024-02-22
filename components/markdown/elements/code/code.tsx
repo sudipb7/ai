@@ -7,7 +7,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 export const MarkdownCode = ({ value, lang }: MarkdownCodeProps) => {
   return (
-    <ScrollArea className="relative text-sm md:text-base my-0.5">
+    <ScrollArea className="relative md:text-base my-0.5">
       <CopyButton content={value!} hideText className="absolute top-1 right-1" />
       {/* @ts-ignore */}
       <SyntaxHighlighter
@@ -17,6 +17,7 @@ export const MarkdownCode = ({ value, lang }: MarkdownCodeProps) => {
         customStyle={{
           borderRadius: "0.3rem",
           padding: "0.6rem 0.4rem",
+          fontSize: "14px",
           margin: 0,
         }}
       >

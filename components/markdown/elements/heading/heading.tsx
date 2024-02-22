@@ -6,19 +6,27 @@ export const MarkdownHeading = ({ depth, text, className = "" }: MarkdownHeading
 
   if (depth === 1) {
     return (
-      <h2 className={cn(initialStyles, "m-1 text-2xl font-semibold tracking-tight", className)}>
-        {text}
-      </h2>
+      <h1 className={cn(initialStyles, "text-3xl md:text-4xl font-bold", className)}>{text}</h1>
     );
   }
 
   if (depth === 2) {
     return (
-      <h3 className={cn(initialStyles, "text-xl font-semibold tracking-tight", className)}>
-        {text}
-      </h3>
+      <h2 className={cn(initialStyles, "text-2xl md:text-3xl font-semibold", className)}>{text}</h2>
     );
   }
 
-  return <h4 className={cn(initialStyles, className)}>{text}</h4>;
+  if (depth === 3) {
+    return (
+      <h3 className={cn(initialStyles, "text-xl md:text-2xl font-semibold", className)}>{text}</h3>
+    );
+  }
+
+  if (depth === 4) {
+    return (
+      <h4 className={cn(initialStyles, "text-lg md:text-xl font-medium", className)}>{text}</h4>
+    );
+  }
+
+  return <h5 className={cn(initialStyles, className)}>{text}</h5>;
 };

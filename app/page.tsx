@@ -6,16 +6,12 @@ import { siteConfig } from "@/lib/config/site-config";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { CardSpotlight } from "@/components/ui/card-spotlight";
-import { MotionH1, MotionP, MotionDiv, MotionLink, MotionFooter } from "@/components/motion";
 
 export default function Home() {
-  const initial = { opacity: 0, translateY: 20 };
-  const animate = { opacity: 1, translateY: 0 };
-
   return (
-    <main className="h-full">
-      <section className="flex flex-col items-center justify-center p-4 pb-24 pt-32">
-        <MotionLink initial={initial} animate={animate} href="/blogs">
+    <main className="min-h-[calc(100dvh-4rem)] animate_in">
+      <section className="animate_in flex flex-col items-center justify-center p-4 py-24">
+        <Link href="/blogs">
           <span className="relative group inline-block w-fit mx-auto overflow-hidden rounded-full p-[1px]">
             <span
               className={cn(
@@ -33,30 +29,15 @@ export default function Home() {
               <p>Discover how AI labs work</p>
             </div>
           </span>
-        </MotionLink>
-        <MotionH1
-          initial={initial}
-          animate={animate}
-          transition={{ delay: 0.2 }}
-          className="primary_gradient my-3 text-4xl md:text-5xl lg:text-6xl md:leading-[3.8rem] lg:leading-[4.8rem] text-center font-semibold tracking-wide"
-        >
+        </Link>
+        <h1 className="primary_gradient my-3 text-4xl md:text-5xl lg:text-6xl md:leading-[3.8rem] lg:leading-[4.8rem] text-center font-semibold tracking-wide">
           AI-Driven Chat, Reimagined
-        </MotionH1>
-        <MotionP
-          initial={initial}
-          animate={animate}
-          transition={{ delay: 0.4 }}
-          className="md:text-lg primary_gradient tracking-wide max-w-3xl text-center"
-        >
+        </h1>
+        <p className="md:text-lg primary_gradient tracking-wide max-w-3xl text-center">
           Experience seamless, intelligent conversations with Gemini Pro&apos;s cutting-edge
           language model.
-        </MotionP>
-        <MotionDiv
-          initial={initial}
-          animate={animate}
-          transition={{ delay: 0.6 }}
-          className="w-full flex items-center justify-center gap-4 mt-6"
-        >
+        </p>
+        <div className="w-full flex items-center justify-center gap-4 mt-6">
           <Button className="btn_gradient" asChild>
             <Link href="/chat">Get Started</Link>
           </Button>
@@ -71,16 +52,10 @@ export default function Home() {
               GitHub
             </Link>
           </Button>
-        </MotionDiv>
+        </div>
       </section>
-      <section className="w-full">
-        <CardSpotlight
-          initial={{ opacity: 0, scale: 0, translateY: 20 }}
-          animate={{ opacity: 1, scale: 1, translateY: 0 }}
-          transition={{ delay: 0.8, duration: 0.2 }}
-          className="mx-auto w-fit max-w-[85%] p-0"
-          hoverEffect
-        >
+      <section className="animate_in w-full">
+        <CardSpotlight className="mx-auto w-fit max-w-[85%] p-0" hoverEffect>
           <Image
             src="/ss.png"
             alt="Chat Page"
@@ -91,12 +66,7 @@ export default function Home() {
           />
         </CardSpotlight>
       </section>
-      <MotionFooter
-        initial={initial}
-        animate={animate}
-        transition={{ delay: 1 }}
-        className="text-sm w-full p-4 mt-4 text-zinc-300 text-center"
-      >
+      <footer className="animate_in text-sm w-full p-4 mt-4 text-zinc-300 text-center">
         Built by{" "}
         <Link
           href={siteConfig.links.twitter}
@@ -115,7 +85,7 @@ export default function Home() {
         >
           GitHub.
         </Link>
-      </MotionFooter>
+      </footer>
     </main>
   );
 }

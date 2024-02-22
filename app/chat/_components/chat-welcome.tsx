@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { ArrowUp } from "lucide-react";
 
-import { MotionDiv } from "@/components/motion";
 import { ActionTooltip } from "@/components/ui/action-tooltip";
 import { Button } from "@/components/ui/button";
 import { CardSpotlight } from "@/components/ui/card-spotlight";
@@ -17,11 +16,7 @@ const prompts = [
   },
 ];
 
-type MotionProps = { opacity: number; translateY: number };
-
 interface ChatWelcomeProps {
-  initial: MotionProps;
-  animate: MotionProps;
   formRef: React.RefObject<HTMLFormElement>;
   textAreaRef: React.RefObject<HTMLTextAreaElement>;
   handleChange: (
@@ -29,13 +24,7 @@ interface ChatWelcomeProps {
   ) => void;
 }
 
-export const ChatWelcome = ({
-  initial,
-  animate,
-  formRef,
-  handleChange,
-  textAreaRef,
-}: ChatWelcomeProps) => {
+export const ChatWelcome = ({ formRef, handleChange, textAreaRef }: ChatWelcomeProps) => {
   const sendPrompt = ({ title, subtitle }: (typeof prompts)[0]) => {
     if (!textAreaRef.current) return;
     const textArea = textAreaRef.current;
@@ -45,27 +34,16 @@ export const ChatWelcome = ({
   };
 
   return (
-    <section className="w-full flex-1 flex flex-col">
-      <MotionDiv
-        initial={initial}
-        animate={animate}
-        className="flex-1 flex flex-col items-center justify-center"
-      >
+    <section className="animate_in w-full flex-1 flex flex-col p-4 pb-24">
+      <div className="flex-1 flex flex-col items-center justify-center">
         <Image src="/logo.svg" alt="AI logo" width={130} height={130} />
         <h2 className="primary_gradient text-center text-2xl md:text-3xl font-semibold">
           How can I help you today?
         </h2>
-      </MotionDiv>
+      </div>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 p-2 gap-3 md:gap-5">
         {prompts.map((prompt, i) => (
-          <CardSpotlight
-            key={i}
-            hoverEffect
-            initial={initial}
-            animate={animate}
-            transition={{ delay: i * 0.1 }}
-            className="col-span-1 p-0 bg-transparent"
-          >
+          <CardSpotlight key={i} hoverEffect className="col-span-1 p-0 bg-transparent">
             <div
               onClick={() => sendPrompt(prompt)}
               className="cursor-pointer flex items-center justify-between p-4"
