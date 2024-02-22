@@ -77,7 +77,7 @@ export const ChatForm = ({
             name="prompt"
             id="prompt"
             placeholder="Ask anything..."
-            className="w-full max-h-[230px] p-4 pr-12 text-sm bg-transparent rounded-xl outline-none placeholder-muted resize-none focus-visible:ring-0 transition"
+            className="w-full max-h-[230px] p-4 pr-12 text-sm bg-transparent rounded-xl outline-none placeholder-muted resize-none transition"
           />
           <Button
             size="icon"
