@@ -4,7 +4,7 @@ import type { AuthSchema } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/server";
 import { AuthForm } from "../_components/auth-form";
 
-export default async function SignUpPage() {
+export default function SignUpPage() {
   const signUp = async (values: AuthSchema) => {
     "use server";
 

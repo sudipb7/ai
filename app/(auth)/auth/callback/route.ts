@@ -14,7 +14,8 @@ export async function GET(request: Request) {
       data: { user },
     } = await supabase.auth.getUser();
     if (user?.email) {
-      await supabase.from("user").insert({ email: user.email });
+      const name = user.email.split("@")[0];
+      await supabase.from("user").insert({ email: user.email, name });
     }
   }
 

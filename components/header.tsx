@@ -29,18 +29,7 @@ export const Header = async () => {
           >
             <Link href="/blogs">Blog</Link>
           </Button>
-          {user ? (
-            <ProfileDropdown />
-          ) : (
-            <Button
-              asChild
-              size="sm"
-              variant="ghost"
-              className="bg-transparent hover:bg-transparent text-zinc-200 hover:text-white"
-            >
-              <Link href="/sign-in">Sign in</Link>
-            </Button>
-          )}
+          {user && <ProfileDropdown />}
         </div>
       </nav>
     </header>

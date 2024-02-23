@@ -37,7 +37,7 @@ export const ProfileDropdown = async () => {
           {profile.image_url ? (
             <AvatarImage src={profile.image_url} alt="Profile avatar" />
           ) : (
-            <div className="rounded-full h-full w-full bg-gradient-to-br from-pink-600 to-blue-500" />
+            <div className="rounded-full h-full w-full bg-gradient-to-br from-pink-700 to-blue-600" />
           )}
         </Avatar>
       </DropdownMenuTrigger>
@@ -46,7 +46,7 @@ export const ProfileDropdown = async () => {
         className="max-sm:mr-2 mt-1.5 md:min-w-[15rem] bg-zinc-900"
       >
         <div className="space-y-1 p-2">
-          <h3 className="text-sm font-medium">{profile.name || "User"}</h3>
+          <h3 className="text-sm font-medium">{profile.name}</h3>
           <p className="text-xs text-zinc-400 font-light">{profile.email}</p>
         </div>
         <DropdownMenuSeparator />

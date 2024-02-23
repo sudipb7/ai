@@ -85,7 +85,7 @@ export const MarkdownElement = ({ element, parent = null }: MarkdownElementProps
           {element.children.map((child, i) => {
             if (child.type === "paragraph") {
               return (
-                <li key={i} className="text-foreground/85 my-0.5 ml-1.5">
+                <li key={i} className="text-foreground/85 my-0.5 ml-3.5">
                   <MarkdownElement element={child} />
                 </li>
               );

@@ -5,7 +5,7 @@ import { Loader } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { authSchema, type AuthSchema } from "@/lib/utils";
+import { authSchema, cn, type AuthSchema } from "@/lib/utils";
 import { useToast } from "@/components/ui/use-toast";
 
 import {
@@ -88,6 +88,7 @@ export const AuthForm = ({
                   <FormControl>
                     <Input
                       {...field}
+                      disabled={isLoading}
                       type="text"
                       placeholder="you@example.com"
                       className="bg-zinc-950/70"
@@ -106,6 +107,7 @@ export const AuthForm = ({
                   <FormControl>
                     <Input
                       {...field}
+                      disabled={isLoading}
                       type="password"
                       placeholder="••••••••"
                       className="bg-zinc-950/70"
@@ -117,7 +119,11 @@ export const AuthForm = ({
             />
           </div>
           <div>
-            <Button type="submit" className="btn_gradient tracking-wide flex items-center w-full">
+            <Button
+              disabled={isLoading}
+              type="submit"
+              className="btn_gradient tracking-wide flex items-center w-full"
+            >
               {isLoading && <Loader className="h-4 w-4 animate-spin mr-2" />}
               {btnText}
             </Button>
@@ -128,7 +134,7 @@ export const AuthForm = ({
         {footerText}{" "}
         <Link
           href={btnText === "Sign Up" ? "/sign-in" : "sign-up"}
-          className="text-zinc-300 group-hover:underline"
+          className={cn("text-zinc-300 group-hover:underline", isLoading && "pointer-events-none")}
         >
           {footerLink}
         </Link>
