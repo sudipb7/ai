@@ -22,7 +22,7 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -30,15 +30,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={font.className}>
-        <div className="h-full">
-          <div className="background"></div>
-          <div className="fixed z-10 inset-0 overflow-y-scroll overflow-x-hidden">
-            <div className="min-h-full relative">
-              <Header />
-              {children}
-              <ModalProvider />
-              <Toaster />
-            </div>
+        <div className="background" />
+        <div className="fixed z-10 inset-0 overflow-y-scroll overflow-x-hidden">
+          <div className="min-h-full relative">
+            <Header />
+            {children}
+            <ModalProvider />
+            <Toaster />
           </div>
         </div>
       </body>

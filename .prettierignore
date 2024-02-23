@@ -55,3 +55,6 @@ build/
 *.tmp
 *.swp
 npx-sh/
+
+# Don't know why but prettier script is not working on types/supabase.ts
+types/**

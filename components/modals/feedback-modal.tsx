@@ -80,7 +80,7 @@ export const FeedbackModal = () => {
                     {...field}
                     disabled={isSubmitting}
                     type="text"
-                    placeholder="example@domain.com"
+                    placeholder="you@example.com"
                   />
                 </FormControl>
                 <FormMessage />
@@ -119,5 +119,20 @@ export const FeedbackModal = () => {
         </form>
       </Form>
     </Modal>
+  );
+};
+
+export const FeedbackModalTrigger = () => {
+  const { onOpen } = useModal();
+
+  return (
+    <Button
+      onClick={() => onOpen("feedback")}
+      size="sm"
+      variant="ghost"
+      className="bg-transparent hover:bg-transparent text-zinc-200 hover:text-white"
+    >
+      Feedback
+    </Button>
   );
 };
