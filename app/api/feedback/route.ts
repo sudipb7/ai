@@ -1,11 +1,16 @@
 import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
-  try {
-    const body = await req.json();
-    const { name, topic, subject, description } = body;
+import { feedbackSchema } from "@/lib/utils";
 
+export async function POST(req: Request) {
+  const schema = feedbackSchema.safeParse(await req.json());
+
+  if (!schema.success) {
+    return new NextResponse(schema.error.message, { status: 400 });
+  }
+
+  try {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -15,15 +20,16 @@ export async function POST(req: Request) {
     });
 
     const html = `
-      <h1>From: ${name}</h1>
-      <h3>${topic}: ${subject}</h3>
-      <p>${description}</p>
+      <div>
+        <h3>Feedback from ${schema.data.email}</h3>
+        <p>${schema.data.description}</p>
+      </div>
     `;
 
     const mailOptions = {
-      from: `${name} <${process.env.USER}>`,
+      from: `<${process.env.USER}>`,
       to: process.env.USER,
-      subject,
+      subject: "Feedback from AI",
       html,
     };
 

@@ -60,7 +60,7 @@ export const MarkdownElement = ({ element, parent = null }: MarkdownElementProps
           <Image
             src={element.url}
             alt={element.alt ?? ""}
-            className="lg:max-w-3xl mx-auto my-4 rounded"
+            className="lg:max-w-3xl mx-auto my-2 rounded"
             width={element.width ?? 900}
             height={element.height ?? 600}
           />
@@ -85,7 +85,7 @@ export const MarkdownElement = ({ element, parent = null }: MarkdownElementProps
           {element.children.map((child, i) => {
             if (child.type === "paragraph") {
               return (
-                <li key={i} className="text-foreground/85 my-0.5 ml-3">
+                <li key={i} className="text-foreground/85 my-0.5 ml-3.5">
                   <MarkdownElement element={child} />
                 </li>
               );

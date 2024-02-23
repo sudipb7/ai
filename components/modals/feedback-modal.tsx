@@ -8,6 +8,7 @@ import { Loader } from "lucide-react";
 
 import { useToast } from "@/components/ui/use-toast";
 import { useModal } from "@/hooks/use-modal-store";
+import { feedbackSchema } from "@/lib/utils";
 
 import {
   Form,
@@ -17,64 +18,20 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogDescription,
-  DialogTitle,
-  DialogFooter,
-} from "@/components/ui/dialog";
-import { Select, SelectItem, SelectContent, SelectTrigger } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-
-const formSchema = z.object({
-  name: z.string().min(1, "Required"),
-  subject: z.string().min(1, "Required"),
-  description: z.string().min(1, "Required"),
-  topic: z.enum(["FEATURE_REQUEST", "COLLABORATION", "IMPROVEMENT", "BUG", "HELP", "OTHER"]),
-});
-
-const topicMap = [
-  {
-    value: "FEATURE_REQUEST",
-    label: "Request a feature",
-  },
-  {
-    value: "COLLABORATION",
-    label: "Wanna collaborate",
-  },
-  {
-    value: "IMPROVEMENT",
-    label: "Improvement",
-  },
-  {
-    value: "HELP",
-    label: "Need help",
-  },
-  {
-    value: "BUG",
-    label: "Bug spotted",
-  },
-  {
-    value: "OTHER",
-    label: "Other",
-  },
-];
+import { Modal } from "@/components/ui/modal";
 
 export const FeedbackModal = () => {
   const { toast } = useToast();
   const { type, isOpen, onClose } = useModal();
   const isModalOpen = isOpen && type === "feedback";
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof feedbackSchema>>({
+    resolver: zodResolver(feedbackSchema),
     defaultValues: {
-      name: "",
-      subject: "",
-      topic: "BUG",
+      email: "",
       description: "",
     },
   });
@@ -86,135 +43,96 @@ export const FeedbackModal = () => {
     onClose();
   };
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof feedbackSchema>) {
     try {
       await axios.post("/api/feedback", values);
       toast({
-        title: "Feedback received!",
-        description: "Thanks for your feedback! We'll review it and reach out soon.",
+        title: "Feedback sent!",
+        description: "Thanks for your feedback!",
       });
       handleClose();
     } catch (error) {
       toast({
         variant: "destructive",
-        title: "Oops! Something went wrong",
+        title: "Something went wrong",
+        description: "Please try again.",
       });
-    } finally {
-      form.reset();
     }
   }
 
-  const getCurrentTopic = () => {
-    const filtered = topicMap.filter((elem) => elem.value === form.getValues("topic"));
-    return filtered[0].label;
-  };
+  return (
+    <Modal
+      title="Your Feedback Matters"
+      description="We are always looking for ways to improve our product. Please let us know if you have any suggestions. Don't hesitate to reach out to us if you have any questions."
+      isOpen={isModalOpen}
+      handleClose={handleClose}
+    >
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    disabled={isSubmitting}
+                    type="text"
+                    placeholder="you@example.com"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Description</FormLabel>
+                <FormControl>
+                  <Textarea
+                    rows={4}
+                    {...field}
+                    disabled={isSubmitting}
+                    placeholder="Please atleast type 10 characters, so we can better understand your suggestions and feedback."
+                    className="resize-none"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className="mt-3 w-full flex items-center justify-stretch md:justify-end">
+            <Button
+              disabled={isSubmitting}
+              type="submit"
+              className="btn_gradient max-md:w-full flex items-center"
+            >
+              {isSubmitting && <Loader className="h-4 w-4 animate-spin mr-2" />}
+              Send feedback
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </Modal>
+  );
+};
+
+export const FeedbackModalTrigger = () => {
+  const { onOpen } = useModal();
 
   return (
-    <Dialog open={isModalOpen} onOpenChange={handleClose}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle className="text-2xl tracking-wide primary_gradient">
-            Your Feedback Matters
-          </DialogTitle>
-          <DialogDescription className="max-sm:text-xs font-medium tracking-wide mt-2">
-            Your feedback matters! Help us improve our service by sharing your thoughts. Your
-            insights will be used to enhance your experience.
-          </DialogDescription>
-        </DialogHeader>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isSubmitting}
-                      type="text"
-                      placeholder="Enter your name"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="subject"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Subject</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isSubmitting}
-                      type="text"
-                      placeholder="Enter your subject"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="topic"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Topic</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger disabled={isSubmitting}>
-                        {field.value ? getCurrentTopic() : "Select one"}
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {topicMap.map(({ value, label }) => (
-                        <SelectItem key={value} value={value}>
-                          {label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Description</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      rows={4}
-                      {...field}
-                      disabled={isSubmitting}
-                      placeholder="Enter your feedback here"
-                      className="resize-none"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <DialogFooter className="mt-3">
-              <Button
-                disabled={isSubmitting}
-                type="submit"
-                className="btn_gradient flex items-center"
-              >
-                {isSubmitting && <Loader className="h-4 w-4 animate-spin mr-2" />}
-                Submit
-              </Button>
-            </DialogFooter>
-          </form>
-        </Form>
-      </DialogContent>
-    </Dialog>
+    <Button
+      onClick={() => onOpen("feedback")}
+      size="sm"
+      variant="ghost"
+      className="bg-transparent hover:bg-transparent text-zinc-200 hover:text-white"
+    >
+      Feedback
+    </Button>
   );
 };

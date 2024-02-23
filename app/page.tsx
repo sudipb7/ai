@@ -1,13 +1,16 @@
-import { Github, Sparkles } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { Github, Sparkles } from "lucide-react";
 
-import { siteConfig } from "@/lib/config/site-config";
 import { cn } from "@/lib/utils";
+import { siteConfig } from "@/lib/config/site-config";
+import { currentProfile } from "@/lib/current-profile";
 import { Button } from "@/components/ui/button";
 import { CardSpotlight } from "@/components/ui/card-spotlight";
 
-export default function Home() {
+export default async function HomePage() {
+  const profile = await currentProfile();
+
   return (
     <main className="min-h-[calc(100dvh-4rem)] animate_in">
       <section className="animate_in flex flex-col items-center justify-center p-4 py-24">
@@ -39,7 +42,7 @@ export default function Home() {
         </p>
         <div className="w-full flex items-center justify-center gap-4 mt-6">
           <Button className="btn_gradient" asChild>
-            <Link href="/chat">Get Started</Link>
+            <Link href={profile ? "/chat" : "/sign-in"}>Get Started</Link>
           </Button>
           <Button asChild variant="secondary">
             <Link

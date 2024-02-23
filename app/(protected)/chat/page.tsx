@@ -5,6 +5,6 @@ export const metadata = {
   description: "Chat with the AI.",
 };
 
-export default function ChatPage() {
+export default async function ChatPage() {
   return <Chat />;
 }
