@@ -21,7 +21,7 @@ export default function SignInPage() {
       throw new Error(error.message);
     }
 
-    revalidatePath("/(protected)", "layout");
+    revalidatePath("/chat");
 
     return redirect("/chat");
   };

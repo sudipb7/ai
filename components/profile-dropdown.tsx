@@ -50,13 +50,6 @@ export const ProfileDropdown = async () => {
           <p className="text-xs text-zinc-400 font-light">{profile.email}</p>
         </div>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="cursor-pointer" asChild>
-          <Link href="/settings" className="flex items-center">
-            <Settings className="h-4 w-4 mr-2" />
-            Settings
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <form action={handleLogout}>
             <button type="submit" className="flex items-center">

@@ -1,10 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { motion, MotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-interface SpotlightCardProps extends MotionProps {
+interface SpotlightCardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
   hoverEffect?: boolean;
@@ -36,7 +35,7 @@ export const CardSpotlight = ({
   const handleMouseLeave = () => setOpacity(0);
 
   return (
-    <motion.div
+    <div
       className={cn(
         "rounded-lg relative p-3 flex flex-col gap-4 shadow-lg bg-zinc-950 border border-zinc-900 bg-cover overflow-hidden group",
         className,
@@ -58,6 +57,6 @@ export const CardSpotlight = ({
         }}
       ></div>
       {children}
-    </motion.div>
+    </div>
   );
 };

@@ -1,17 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { createClient } from "@/lib/supabase/server";
+import { currentProfile } from "@/lib/current-profile";
 import { ProfileDropdown } from "@/components/profile-dropdown";
 import { FeedbackModalTrigger } from "@/components/modals/feedback-modal";
-import { Button } from "@/components/ui/button";
 
 export const Header = async () => {
-  const supabase = createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const profile = await currentProfile();
 
   return (
     <header className="sticky inset-x-0 top-0 z-20 w-full backdrop-blur-2xl">
@@ -21,15 +16,7 @@ export const Header = async () => {
         </Link>
         <div className="flex items-center gap-1 sm:gap-2 md:gap-4 p-2">
           <FeedbackModalTrigger />
-          <Button
-            asChild
-            size="sm"
-            variant="ghost"
-            className="bg-transparent hover:bg-transparent text-zinc-200 hover:text-white"
-          >
-            <Link href="/blogs">Blog</Link>
-          </Button>
-          {user && <ProfileDropdown />}
+          {profile && <ProfileDropdown />}
         </div>
       </nav>
     </header>
