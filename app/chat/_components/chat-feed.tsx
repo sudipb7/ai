@@ -32,7 +32,7 @@ export const ChatFeed = ({ messages = [], isLoading }: ChatFeedProps) => {
   });
 
   return (
-    <div className="animate_in flex flex-col h-max w-full rounded-lg px-4 pb-20" ref={chatRef}>
+    <div className="flex flex-col h-max w-full rounded-lg px-4 pb-20" ref={chatRef}>
       <section className="flex flex-col w-full gap-4 p-2">
         {messages.length > 0 &&
           messages.map((message) => {
@@ -47,7 +47,7 @@ export const ChatFeed = ({ messages = [], isLoading }: ChatFeedProps) => {
                 <div
                   className={cn(
                     "relative max-w-[95%] md:max-w-[85%] border border-secondary rounded-lg p-3 transition-all",
-                    isAI ? "mr-auto bg-zinc-900" : "ml-auto bg-transparent",
+                    isAI ? "mr-auto bg-zinc-900" : "ml-auto bg-transparent"
                   )}
                 >
                   <Markdown source={message?.content} />

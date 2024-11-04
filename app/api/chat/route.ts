@@ -21,7 +21,10 @@ export async function POST(req: Request) {
     const { messages } = await req.json();
 
     const geminiStream = await genAI
-      .getGenerativeModel({ model: "gemini-pro" })
+      .getGenerativeModel({
+        model: "gemini-1.5-flash",
+        systemInstruction: `Your name is AI. Respond in Markdown format. Use headers, lists, and code blocks where appropriate. Be concise and to the point. Avoid unnecessary explanations or tangents. Prioritize accuracy and correctness. Cite sources if needed. Provide follow-up questions to encourage deeper exploration. If the user asks for clarification, provide a clear and concise explanation. If user wants to request a new feature, bug report or provide feedback, ask them to contact Sudip Biswas who created this platform at https://x.com/sudipbiswas_dev.`,
+      })
       .generateContentStream(buildGoogleGenAIPrompt(messages));
 
     // Convert the response into a friendly text-stream

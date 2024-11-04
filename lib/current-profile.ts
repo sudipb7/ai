@@ -7,9 +7,9 @@ export const currentProfile = async () => {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) return null;
+  if (!user?.email) return null;
 
-  const { data: profile } = await supabase.from("user").select().eq("id", user.id).single();
+  const { data: profile } = await supabase.from("user").select().eq("email", user.email).single();
 
   if (!profile) return null;
 

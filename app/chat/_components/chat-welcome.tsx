@@ -7,12 +7,12 @@ import { CardSpotlight } from "@/components/ui/card-spotlight";
 
 const prompts = [
   {
-    title: "Help me dubug",
-    subtitle: "a linked list problem in C++.",
+    title: "Teach me something new",
+    subtitle: "about the history of the internet.",
   },
   {
-    title: "Write a text message",
-    subtitle: "asking a friend to be my plus-one at a wedding.",
+    title: "Create an email template",
+    subtitle: "for a new product launch.",
   },
 ];
 
@@ -20,7 +20,7 @@ interface ChatWelcomeProps {
   formRef: React.RefObject<HTMLFormElement>;
   textAreaRef: React.RefObject<HTMLTextAreaElement>;
   handleChange: (
-    e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>
   ) => void;
 }
 
@@ -34,7 +34,7 @@ export const ChatWelcome = ({ formRef, handleChange, textAreaRef }: ChatWelcomeP
   };
 
   return (
-    <section className="animate_in w-full flex-1 flex flex-col p-4 pb-24">
+    <section className="w-full flex-1 flex flex-col p-4 pb-24">
       <div className="flex-1 flex flex-col items-center justify-center">
         <Image src="/logo.svg" alt="AI logo" width={130} height={130} />
         <h2 className="primary_gradient text-center text-2xl md:text-3xl font-semibold">

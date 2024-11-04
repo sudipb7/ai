@@ -2,7 +2,7 @@
 
 AI is a free tool to interact with Google's Gemini Pro model with an amazing user experience
 
-![Landing page](https://ai.sudipbiswas.me/og.png)
+![Landing page](https://ai.sudipbiswas.dev/og.png)
 
 ## Tech Stack
 

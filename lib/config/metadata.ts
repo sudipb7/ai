@@ -14,7 +14,7 @@ export const metadataConfig = {
   authors: [
     {
       name: "Sudip Biswas",
-      url: "https://sudipbiswas.me",
+      url: "https://sudipbiswas.dev",
     },
   ],
   twitter: {

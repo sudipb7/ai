@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "AI",
-  url: "https://ai.sudipbiswas.me",
-  ogImage: "https://ai.sudipbiswas.me/og.png",
+  url: "https://ai.sudipbiswas.dev",
+  ogImage: "https://ai.sudipbiswas.dev/og.png",
   description: "Experience AI like never before.",
   links: {
     twitter: "https://twitter.com/sudipb7_",

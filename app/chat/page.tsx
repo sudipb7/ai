@@ -12,7 +12,7 @@ export default async function ChatPage() {
   const profile = await currentProfile();
 
   if (!profile) {
-    return redirect("/login");
+    return redirect("/sign-in");
   }
 
   return <Chat />;

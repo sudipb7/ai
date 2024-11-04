@@ -33,6 +33,6 @@ export const createClient = () => {
           }
         },
       },
-    },
+    }
   );
 };

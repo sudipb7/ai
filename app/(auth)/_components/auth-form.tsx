@@ -71,7 +71,7 @@ export const AuthForm = ({
   }
 
   return (
-    <section className="animate_in w-full h-full max-w-sm flex flex-col p-6 gap-6">
+    <section className="w-full h-full max-w-sm flex flex-col p-6 gap-6">
       <div className="space-y-2 mb-2 tracking-wide">
         <h1 className="text-3xl md:text-4xl font-semibold primary_gradient">{title}</h1>
         <p className="text-zinc-300 md:text-md font-medium">{description}</p>

@@ -14,10 +14,10 @@ interface ChatFormProps {
   textAreaRef: React.RefObject<HTMLTextAreaElement>;
   handleSubmit: (
     e: React.FormEvent<HTMLFormElement>,
-    chatRequestOptions?: ChatRequestOptions | undefined,
+    chatRequestOptions?: ChatRequestOptions | undefined
   ) => void;
   handleInputChange: (
-    e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>
   ) => void;
 }
 
@@ -62,7 +62,7 @@ export const ChatForm = ({
   }, [formRef]);
 
   return (
-    <section className="animate_in bg-zinc-950 fixed bottom-0 inset-x-0">
+    <section className="bg-zinc-950 fixed bottom-0 inset-x-0">
       <form
         ref={formRef}
         onSubmit={handleFormSubmit}
@@ -70,6 +70,7 @@ export const ChatForm = ({
       >
         <div className="relative w-full">
           <Textarea
+            aria-label="Enter your prompt"
             rows={1}
             value={input}
             ref={textAreaRef}

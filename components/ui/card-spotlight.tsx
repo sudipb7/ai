@@ -38,7 +38,7 @@ export const CardSpotlight = ({
     <div
       className={cn(
         "rounded-lg relative p-3 flex flex-col gap-4 shadow-lg bg-zinc-950 border border-zinc-900 bg-cover overflow-hidden group",
-        className,
+        className
       )}
       {...props}
       style={style}

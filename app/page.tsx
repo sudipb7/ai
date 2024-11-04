@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import { Github, Sparkles } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -10,21 +11,24 @@ import { CardSpotlight } from "@/components/ui/card-spotlight";
 
 export default async function HomePage() {
   const profile = await currentProfile();
+  if (profile?.email) {
+    return redirect("/chat");
+  }
 
   return (
-    <main className="min-h-[calc(100dvh-4rem)] animate_in">
-      <section className="animate_in flex flex-col items-center justify-center p-4 py-24">
+    <main className="min-h-[calc(100dvh-4rem)]">
+      <section className="flex flex-col items-center justify-center p-4 py-24">
         <span className="relative group inline-block w-fit mx-auto overflow-hidden rounded-full p-[1px]">
           <span
             className={cn(
               "absolute inset-[-1000%] bg-[conic-gradient(from_90deg_at_50%_50%,#71717a_0%,#27272a_50%,#71717a_100%)]",
-              "animate-spin duration-700 rounded-full group-hover:animate-none",
+              "animate-spin duration-700 rounded-full group-hover:animate-none"
             )}
           />
           <div
             className={cn(
               "flex gap-1 h-full group w-full items-center justify-center rounded-full bg-zinc-900 px-3 py-1 text-xs text-zinc-200 backdrop-blur-3xl",
-              "hover:backdrop-blur-2xl hover:shadow-lg transition-all duration-200 ease-in-out",
+              "hover:backdrop-blur-2xl hover:shadow-lg transition-all duration-200 ease-in-out"
             )}
           >
             <Sparkles className="mr-1 h-3 w-3" />
@@ -40,7 +44,7 @@ export default async function HomePage() {
         </p>
         <div className="w-full flex items-center justify-center gap-4 mt-6">
           <Button className="btn_gradient" asChild>
-            <Link href={profile ? "/chat" : "/sign-in"}>Get Started</Link>
+            <Link href="/chat">Get Started</Link>
           </Button>
           <Button asChild variant="secondary">
             <Link
@@ -55,7 +59,7 @@ export default async function HomePage() {
           </Button>
         </div>
       </section>
-      <section className="animate_in w-full">
+      <section className="w-full">
         <CardSpotlight className="mx-auto w-fit max-w-[85%] p-0" hoverEffect>
           <Image
             src="/ss.png"
@@ -67,7 +71,7 @@ export default async function HomePage() {
           />
         </CardSpotlight>
       </section>
-      <footer className="animate_in text-sm w-full p-4 mt-4 text-zinc-300 text-center">
+      <footer className="text-sm w-full p-4 mt-4 text-zinc-300 text-center">
         Built by{" "}
         <Link
           href={siteConfig.links.twitter}
