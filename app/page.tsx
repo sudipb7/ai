@@ -5,13 +5,16 @@ import { Github, Sparkles } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/config/site-config";
-import { currentProfile } from "@/lib/current-profile";
 import { Button } from "@/components/ui/button";
 import { CardSpotlight } from "@/components/ui/card-spotlight";
+import { createClient } from "@/lib/supabase/server";
 
 export default async function HomePage() {
-  const profile = await currentProfile();
-  if (profile?.email) {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (user?.email) {
     return redirect("/chat");
   }
 

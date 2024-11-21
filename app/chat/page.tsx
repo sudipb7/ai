@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
-import { currentProfile } from "@/lib/current-profile";
 import Chat from "./_components";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata = {
   title: "Chat",
@@ -9,9 +9,12 @@ export const metadata = {
 };
 
 export default async function ChatPage() {
-  const profile = await currentProfile();
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  if (!profile) {
+  if (!user?.email) {
     return redirect("/sign-in");
   }
 
